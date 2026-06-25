@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matricule Header Coder Voice</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="setup-panel" id="setupPanel">
+        <div>
+          <p class="eyebrow">Excel coding tool</p>
+          <h1>Matricule Header Coder</h1>
+          <p class="lede">Load a spreadsheet, type or speak the matricule digits, then save each code quickly.</p>
+        </div>
+        <div class="setup-grid">
+          <label class="field"><span>Excel file</span><input id="fileInput" type="file" accept=".xlsx,.xls,.csv" /></label>
+          <label class="field"><span>Academic year</span><input id="yearInput" type="text" inputmode="numeric" maxlength="2" value="24" /></label>
+          <label class="field"><span>Starting code</span><input id="startCodeInput" type="text" inputmode="numeric" value="001" /></label>
+          <label class="check-row"><input id="autoYearInput" type="checkbox" checked /><span>Automatically select exact academic year match</span></label>
+        </div>
+        <div class="actions">
+          <button id="startButton" class="primary">Start Session</button>
+          <a class="ghost-link" href="sample_student_template.csv" download>Download CSV template</a>
+        </div>
+      </section>
+
+      <section class="work-panel hidden" id="workPanel">
+        <header class="work-header">
+          <div><p class="eyebrow">Active session</p><h1>Fast Coding Desk</h1></div>
+          <div class="header-actions">
+            <button id="undoButton" class="secondary">Undo</button>
+            <button id="exportButton" class="primary">Export Updated File</button>
+          </div>
+        </header>
+        <section class="metrics">
+          <div><span>Academic Year</span><strong id="metricYear">-</strong></div>
+          <div><span>Current Code</span><strong id="metricCode">-</strong></div>
+          <div><span>Processed</span><strong id="metricProcessed">0</strong></div>
+          <div><span>Remaining</span><strong id="metricRemaining">0</strong></div>
+          <div><span>Total Coded</span><strong id="metricCoded">0</strong></div>
+        </section>
+        <section class="command-zone">
+          <div class="search-card">
+            <div class="search-topline">
+              <label for="searchInput">Type numbers or matricule</label>
+              <label class="voice-toggle"><input id="voiceToggle" type="checkbox" /><span>Use voice command</span></label>
+            </div>
+            <input id="searchInput" class="search-input" type="text" autocomplete="off" placeholder="031, C031, 24C031, UBA24C031" />
+            <div class="quick-actions">
+              <button id="saveButton" class="primary">Save Current Match</button>
+              <button id="clearButton" class="secondary">Clear</button>
+            </div>
+            <p id="matchPreview" class="match-preview">Type a matricule or say the digits.</p>
+            <p id="voiceStatus" class="voice-status">Voice off. Toggle it on, say digits, then say save.</p>
+          </div>
+          <div class="status-card"><span>Status</span><strong id="statusText">Load a file to begin.</strong></div>
+        </section>
+        <section class="tables">
+          <div class="table-card"><h2>Search Matches</h2><div id="matchesList" class="list"></div></div>
+          <div class="table-card"><h2>Last 20 Assignments</h2><div id="historyList" class="list"></div></div>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="choiceDialog">
+      <form method="dialog">
+        <h2 id="dialogTitle">Choose Record</h2>
+        <p id="dialogMessage"></p>
+        <div id="dialogChoices" class="dialog-choices"></div>
+        <menu><button value="cancel" class="secondary">Cancel</button></menu>
+      </form>
+    </dialog>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
